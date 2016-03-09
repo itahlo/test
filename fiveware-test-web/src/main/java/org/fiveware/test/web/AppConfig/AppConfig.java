@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages={"org.fiveware.test.web"})
+@ComponentScan(basePackages={"org.fiveware.test"})
 public class AppConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
