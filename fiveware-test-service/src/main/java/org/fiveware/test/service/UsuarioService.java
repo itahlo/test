@@ -1,33 +1,26 @@
 package org.fiveware.test.service;
 
-import org.fiveware.test.model.dao.UsuarioDao;
-import org.fiveware.test.model.entity.Usuario;
+import java.util.List;
 
-/**
- * Hello world!
- *
- */
+import org.fiveware.test.model.entity.Usuario;
+import org.fiveware.test.model.repository.UsuarioRepository;
+
 public class UsuarioService 
 {
 	
 	public UsuarioService() {
 	}
 	
-    public void cadastrar() {
+	public List<Usuario> usuariosEmpregados() {
+		UsuarioRepository user = new UsuarioRepository();
+		return user.usuariosEmpregados();
+	}
+	
+    public void salvar(Usuario usr) {
     	
-    	UsuarioDao userDao = new UsuarioDao();
-    	userDao.salvar();
+    	UsuarioRepository user = new UsuarioRepository();
+    	user.salvar(usr);
     	
     }
-    
-    public Usuario exibir() {
-    	
-    	Usuario user = new Usuario();
-    	user.setNome("Italo Santana");
-    	user.setEmail("italo.santss@gmail.com");
-    	
-    	return user;
-    }
-    
     
 }

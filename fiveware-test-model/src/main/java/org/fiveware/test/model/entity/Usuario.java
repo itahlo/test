@@ -1,15 +1,28 @@
 package org.fiveware.test.model.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="usuario")
-public class Usuario {
+public class Usuario implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	@Column(name="id")
@@ -27,11 +40,15 @@ public class Usuario {
 	@Column(name = "empregado")
 	private Boolean empregado;
 	
-	public Usuario(String nome, String email) {
-		super();
-		this.nome = nome;
-		this.email = email;
-	}
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name="usuario_skills", joinColumns=
+	{@JoinColumn(name="id_usuario")}, inverseJoinColumns=
+	  {@JoinColumn(name="id_skills")})
+	private List<Skills> skills;
+	
+	
+	public Usuario() {}
 	
 	public int getId() {
 		return id;
@@ -40,8 +57,6 @@ public class Usuario {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public Usuario() {}
 	
 	public String getNome() {
 		return nome;
@@ -71,5 +86,14 @@ public class Usuario {
 	public void setEmpregado(Boolean empregado) {
 		this.empregado = empregado;
 	}
+
+	public List<Skills> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skills> skills) {
+		this.skills = skills;
+	}
+
 	
 }
